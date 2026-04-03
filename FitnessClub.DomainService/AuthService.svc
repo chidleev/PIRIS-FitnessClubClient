@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="FitnessClub.DomainService.AuthService" CodeBehind="AuthService.svc.cs" %>

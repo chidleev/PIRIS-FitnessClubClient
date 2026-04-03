@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0 # Можно указать mysql:latest, но лучше фиксировать версию
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword # Укажите свой пароль для root
+      MYSQL_DATABASE: my_database       # (Опционально) создать пустую БД при старте
+      MYSQL_USER: user                  # (Опционально) создать обычного пользователя
+      MYSQL_PASSWORD: userpassword      # (Опционально) пароль обычного пользователя
+    ports:
+      - "3306:3306" # Проброс порта, чтобы подключаться извне (например, через DBeaver)
+    volumes:
+      - db_data:/var/lib/mysql # Сохраняем данные БД, чтобы они не удалились при перезапуске
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    restart: always
+    depends_on:
+      - db # Запускать только после старта базы данных
+    environment:
+      PMA_HOST: db # ВАЖНО: Имя хоста должно совпадать с названием сервиса БД (выше это 'db')
+      PMA_PORT: 3306
+    ports:
+      - "8080:80" # phpMyAdmin будет доступен по адресу http://localhost:8080
+
+volumes:
+  db_data: # Объявление тома для сохранения данных
