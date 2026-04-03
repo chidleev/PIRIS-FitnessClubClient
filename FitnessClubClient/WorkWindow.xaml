@@ -1,0 +1,96 @@
+﻿<Window x:Class="FitnessClubClient.WorkWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FitnessClubClient"
+        mc:Ignorable="d"
+        Title="Рабочее окно - Система фитнес-клуба" Height="600" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Информационная панель -->
+            <RowDefinition Height="*"/>
+            <!-- Таблица DataGrid -->
+            <RowDefinition Height="Auto"/>
+            <!-- Панель действий -->
+        </Grid.RowDefinitions>
+
+        <!-- Информационная панель пользователя -->
+        <Border Grid.Row="0" BorderBrush="LightGray" BorderThickness="0,0,0,2" Padding="10" Background="#FFF5F5F5">
+            <Grid>
+                <Label x:Name="lblUserInfo" Content="Пользователь: " FontWeight="Bold" FontSize="14" HorizontalAlignment="Left"/>
+                <Button x:Name="bLogout" Content="Выход" Width="80" Height="25" HorizontalAlignment="Right" 
+                        Background="#FFF44336" Foreground="White" Click="bLogout_Click"/>
+            </Grid>
+        </Border>
+
+        <!-- Таблица данных DataGrid -->
+        <DataGrid x:Name="dgSchedule" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True" Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Услуга" Binding="{Binding ServiceName}" Width="*"/>
+                <DataGridTextColumn Header="ФИО Тренера" Binding="{Binding TrainerName}" Width="*"/>
+                <DataGridTextColumn Header="Дата" Binding="{Binding Date, StringFormat=dd.MM.yyyy}" Width="100"/>
+                <DataGridTextColumn Header="Время" Binding="{Binding Time}" Width="100"/>
+                <DataGridTextColumn Header="Свободных мест" Binding="{Binding AvailableSpots}" Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Панель действий внутри ScrollViewer -->
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" MaxHeight="220" Margin="10,0,10,10">
+            <StackPanel>
+
+                <Separator Margin="0,5"/>
+
+                <!-- Блок фильтрации (Напоминания) -->
+                <TextBlock Text="Напоминания и фильтры:" FontWeight="Bold" Margin="0,0,0,5"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,15">
+                    <Label Content="Дата тренировки:"/>
+                    <DatePicker x:Name="dpFilterDate" Width="150" Margin="5,0"/>
+                    <Button x:Name="bReminders" Content="Напоминания (Найти)" Width="140" Margin="5,0" Click="bReminders_Click"/>
+                    <Button x:Name="bResetFilter" Content="Сбросить фильтр" Width="120" Margin="5,0" Click="bResetFilter_Click"/>
+                </StackPanel>
+
+                <!-- Блок добавления новой записи -->
+                <TextBlock Text="Добавление новой записи в расписание:" FontWeight="Bold" Margin="0,0,0,10"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Content="Услуга:"/>
+                    <ComboBox x:Name="cbService" Grid.Row="0" Grid.Column="1" Margin="5" SelectionChanged="AddForm_Changed">
+                        <ComboBoxItem Content="Йога"/>
+                        <ComboBoxItem Content="Бокс"/>
+                        <ComboBoxItem Content="Кроссфит"/>
+                        <ComboBoxItem Content="Пилатес"/>
+                    </ComboBox>
+
+                    <Label Grid.Row="0" Grid.Column="2" Content="ФИО Тренера:"/>
+                    <TextBox x:Name="tbTrainer" Grid.Row="0" Grid.Column="3" Margin="5" TextChanged="AddForm_Changed"/>
+
+                    <Label Grid.Row="1" Grid.Column="0" Content="Дата:"/>
+                    <DatePicker x:Name="dpAddDate" Grid.Row="1" Grid.Column="1" Margin="5" SelectedDateChanged="AddForm_Changed"/>
+
+                    <Label Grid.Row="1" Grid.Column="2" Content="Время (ЧЧ:ММ):"/>
+                    <TextBox x:Name="tbTime" Grid.Row="1" Grid.Column="3" Margin="5" TextChanged="AddForm_Changed"/>
+
+                    <Label Grid.Row="2" Grid.Column="0" Content="Кол-во мест:"/>
+                    <TextBox x:Name="tbSpots" Grid.Row="2" Grid.Column="1" Margin="5" TextChanged="AddForm_Changed"/>
+
+                    <Button x:Name="bAddRecord" Grid.Row="2" Grid.Column="3" Content="Добавить запись" 
+                            Margin="5" Height="30" IsEnabled="False" Background="#FF4CAF50" Foreground="Black" Click="bAddRecord_Click"/>
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

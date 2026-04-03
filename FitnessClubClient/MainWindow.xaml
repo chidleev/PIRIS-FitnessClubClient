@@ -5,8 +5,37 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessClubClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Авторизация и регистрация" Height="450" Width="400"
+        WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="250">
+
+            <!-- Приветственный заголовок системы управления клубом -->
+            <TextBlock Text="Система управления фитнес-клубом" 
+                       FontSize="16" FontWeight="Bold" TextAlignment="Center" 
+                       TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+            <!-- Поле ввода логина -->
+            <Label Content="Логин:"/>
+            <TextBox x:Name="tbLogin" TextChanged="Fields_TextChanged" Margin="0,0,0,10" Height="25"/>
+
+            <!-- Поле ввода пароля -->
+            <Label Content="Пароль:"/>
+            <TextBox x:Name="tbPassword" TextChanged="Fields_TextChanged" Margin="0,0,0,10" Height="25"/>
+
+            <!-- Поле подтверждения пароля (для регистрации) -->
+            <Label Content="Подтверждение пароля:"/>
+            <TextBox x:Name="tbConfirmPassword" TextChanged="Fields_TextChanged" Margin="0,0,0,20" Height="25"/>
+
+            <!-- Кнопки управления (по умолчанию отключены) -->
+            <Button x:Name="bLogin" Content="Войти" 
+                    IsEnabled="False" Click="bLogin_Click" 
+                    Margin="0,0,0,10" Height="30" Background="#FF4CAF50" Foreground="Black"/>
+
+            <Button x:Name="bRegister" Content="Зарегистрироваться" 
+                    IsEnabled="False" Click="bRegister_Click" 
+                    Height="30" Background="#FF2196F3" Foreground="Black"/>
+
+        </StackPanel>
     </Grid>
 </Window>
