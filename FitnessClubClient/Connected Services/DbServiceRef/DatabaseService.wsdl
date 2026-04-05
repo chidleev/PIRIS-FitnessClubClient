@@ -1,0 +1,780 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://tempuri.org/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" name="DatabaseService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:51305/DatabaseService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:51305/DatabaseService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:51305/DatabaseService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/FitnessClub.DomainService.Models" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IDatabaseService_AddCredential_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddCredential" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_AddCredential_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddCredentialResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetCredential_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCredential" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetCredential_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCredentialResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_UpdateCredential_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCredential" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_UpdateCredential_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateCredentialResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_DeleteCredential_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCredential" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_DeleteCredential_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteCredentialResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_AddUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUser" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_AddUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUser" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetAllUsers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsers" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetAllUsers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_UpdateUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUser" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_UpdateUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_DeleteUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUser" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_DeleteUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_AddAdmin_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddAdmin" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_AddAdmin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddAdminResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetAdmin_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAdmin" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetAdmin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAdminResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetAllAdmins_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllAdmins" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetAllAdmins_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllAdminsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_UpdateAdmin_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAdmin" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_UpdateAdmin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateAdminResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_DeleteAdmin_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAdmin" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_DeleteAdmin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteAdminResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_AddTrainer_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddTrainer" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_AddTrainer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddTrainerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetTrainer_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTrainer" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetTrainer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTrainerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetAllTrainers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTrainers" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetAllTrainers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTrainersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_UpdateTrainer_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTrainer" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_UpdateTrainer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateTrainerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_DeleteTrainer_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTrainer" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_DeleteTrainer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteTrainerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_AddSchedule_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddSchedule" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_AddSchedule_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddScheduleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetSchedulesByTrainer_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSchedulesByTrainer" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetSchedulesByTrainer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSchedulesByTrainerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_UpdateSchedule_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateSchedule" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_UpdateSchedule_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateScheduleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_DeleteSchedule_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteSchedule" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_DeleteSchedule_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteScheduleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_AddService_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddService" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_AddService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetService_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetService" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetAllServices_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllServices" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetAllServices_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllServicesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_UpdateService_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateService" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_UpdateService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_DeleteService_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteService" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_DeleteService_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteServiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_AddEvent_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddEvent" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_AddEvent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddEventResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetEvent_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEvent" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetEvent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetAllEvents_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllEvents" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetAllEvents_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllEventsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetEventsByDate_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventsByDate" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetEventsByDate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetEventsByDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_UpdateEvent_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateEvent" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_UpdateEvent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateEventResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_DeleteEvent_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteEvent" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_DeleteEvent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteEventResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_AddBooking_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddBooking" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_AddBooking_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddBookingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetBooking_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBooking" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetBooking_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBookingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetBookingsByUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBookingsByUser" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetBookingsByUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBookingsByUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetBookingsByEvent_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBookingsByEvent" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_GetBookingsByEvent_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBookingsByEventResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_UpdateBooking_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBooking" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_UpdateBooking_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBookingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_DeleteBooking_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteBooking" />
+  </wsdl:message>
+  <wsdl:message name="IDatabaseService_DeleteBooking_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteBookingResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IDatabaseService">
+    <wsdl:operation name="AddCredential">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/AddCredential" message="tns:IDatabaseService_AddCredential_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/AddCredentialResponse" message="tns:IDatabaseService_AddCredential_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCredential">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/GetCredential" message="tns:IDatabaseService_GetCredential_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/GetCredentialResponse" message="tns:IDatabaseService_GetCredential_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCredential">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/UpdateCredential" message="tns:IDatabaseService_UpdateCredential_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/UpdateCredentialResponse" message="tns:IDatabaseService_UpdateCredential_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCredential">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/DeleteCredential" message="tns:IDatabaseService_DeleteCredential_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/DeleteCredentialResponse" message="tns:IDatabaseService_DeleteCredential_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/AddUser" message="tns:IDatabaseService_AddUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/AddUserResponse" message="tns:IDatabaseService_AddUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/GetUser" message="tns:IDatabaseService_GetUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/GetUserResponse" message="tns:IDatabaseService_GetUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/GetAllUsers" message="tns:IDatabaseService_GetAllUsers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/GetAllUsersResponse" message="tns:IDatabaseService_GetAllUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/UpdateUser" message="tns:IDatabaseService_UpdateUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/UpdateUserResponse" message="tns:IDatabaseService_UpdateUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/DeleteUser" message="tns:IDatabaseService_DeleteUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/DeleteUserResponse" message="tns:IDatabaseService_DeleteUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddAdmin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/AddAdmin" message="tns:IDatabaseService_AddAdmin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/AddAdminResponse" message="tns:IDatabaseService_AddAdmin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAdmin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/GetAdmin" message="tns:IDatabaseService_GetAdmin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/GetAdminResponse" message="tns:IDatabaseService_GetAdmin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAdmins">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/GetAllAdmins" message="tns:IDatabaseService_GetAllAdmins_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/GetAllAdminsResponse" message="tns:IDatabaseService_GetAllAdmins_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAdmin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/UpdateAdmin" message="tns:IDatabaseService_UpdateAdmin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/UpdateAdminResponse" message="tns:IDatabaseService_UpdateAdmin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAdmin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/DeleteAdmin" message="tns:IDatabaseService_DeleteAdmin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/DeleteAdminResponse" message="tns:IDatabaseService_DeleteAdmin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddTrainer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/AddTrainer" message="tns:IDatabaseService_AddTrainer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/AddTrainerResponse" message="tns:IDatabaseService_AddTrainer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTrainer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/GetTrainer" message="tns:IDatabaseService_GetTrainer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/GetTrainerResponse" message="tns:IDatabaseService_GetTrainer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTrainers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/GetAllTrainers" message="tns:IDatabaseService_GetAllTrainers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/GetAllTrainersResponse" message="tns:IDatabaseService_GetAllTrainers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTrainer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/UpdateTrainer" message="tns:IDatabaseService_UpdateTrainer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/UpdateTrainerResponse" message="tns:IDatabaseService_UpdateTrainer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTrainer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/DeleteTrainer" message="tns:IDatabaseService_DeleteTrainer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/DeleteTrainerResponse" message="tns:IDatabaseService_DeleteTrainer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddSchedule">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/AddSchedule" message="tns:IDatabaseService_AddSchedule_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/AddScheduleResponse" message="tns:IDatabaseService_AddSchedule_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSchedulesByTrainer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/GetSchedulesByTrainer" message="tns:IDatabaseService_GetSchedulesByTrainer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/GetSchedulesByTrainerResponse" message="tns:IDatabaseService_GetSchedulesByTrainer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSchedule">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/UpdateSchedule" message="tns:IDatabaseService_UpdateSchedule_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/UpdateScheduleResponse" message="tns:IDatabaseService_UpdateSchedule_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSchedule">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/DeleteSchedule" message="tns:IDatabaseService_DeleteSchedule_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/DeleteScheduleResponse" message="tns:IDatabaseService_DeleteSchedule_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddService">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/AddService" message="tns:IDatabaseService_AddService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/AddServiceResponse" message="tns:IDatabaseService_AddService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetService">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/GetService" message="tns:IDatabaseService_GetService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/GetServiceResponse" message="tns:IDatabaseService_GetService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllServices">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/GetAllServices" message="tns:IDatabaseService_GetAllServices_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/GetAllServicesResponse" message="tns:IDatabaseService_GetAllServices_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateService">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/UpdateService" message="tns:IDatabaseService_UpdateService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/UpdateServiceResponse" message="tns:IDatabaseService_UpdateService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteService">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/DeleteService" message="tns:IDatabaseService_DeleteService_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/DeleteServiceResponse" message="tns:IDatabaseService_DeleteService_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddEvent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/AddEvent" message="tns:IDatabaseService_AddEvent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/AddEventResponse" message="tns:IDatabaseService_AddEvent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEvent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/GetEvent" message="tns:IDatabaseService_GetEvent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/GetEventResponse" message="tns:IDatabaseService_GetEvent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllEvents">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/GetAllEvents" message="tns:IDatabaseService_GetAllEvents_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/GetAllEventsResponse" message="tns:IDatabaseService_GetAllEvents_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsByDate">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/GetEventsByDate" message="tns:IDatabaseService_GetEventsByDate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/GetEventsByDateResponse" message="tns:IDatabaseService_GetEventsByDate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEvent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/UpdateEvent" message="tns:IDatabaseService_UpdateEvent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/UpdateEventResponse" message="tns:IDatabaseService_UpdateEvent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEvent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/DeleteEvent" message="tns:IDatabaseService_DeleteEvent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/DeleteEventResponse" message="tns:IDatabaseService_DeleteEvent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddBooking">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/AddBooking" message="tns:IDatabaseService_AddBooking_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/AddBookingResponse" message="tns:IDatabaseService_AddBooking_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBooking">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/GetBooking" message="tns:IDatabaseService_GetBooking_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/GetBookingResponse" message="tns:IDatabaseService_GetBooking_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBookingsByUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/GetBookingsByUser" message="tns:IDatabaseService_GetBookingsByUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/GetBookingsByUserResponse" message="tns:IDatabaseService_GetBookingsByUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBookingsByEvent">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/GetBookingsByEvent" message="tns:IDatabaseService_GetBookingsByEvent_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/GetBookingsByEventResponse" message="tns:IDatabaseService_GetBookingsByEvent_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBooking">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/UpdateBooking" message="tns:IDatabaseService_UpdateBooking_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/UpdateBookingResponse" message="tns:IDatabaseService_UpdateBooking_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBooking">
+      <wsdl:input wsaw:Action="http://tempuri.org/IDatabaseService/DeleteBooking" message="tns:IDatabaseService_DeleteBooking_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IDatabaseService/DeleteBookingResponse" message="tns:IDatabaseService_DeleteBooking_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IDatabaseService" type="tns:IDatabaseService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AddCredential">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/AddCredential" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCredential">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/GetCredential" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateCredential">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/UpdateCredential" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteCredential">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/DeleteCredential" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddUser">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/AddUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUser">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/GetUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllUsers">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/GetAllUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUser">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/UpdateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUser">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/DeleteUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddAdmin">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/AddAdmin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdmin">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/GetAdmin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllAdmins">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/GetAllAdmins" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateAdmin">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/UpdateAdmin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteAdmin">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/DeleteAdmin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddTrainer">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/AddTrainer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTrainer">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/GetTrainer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTrainers">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/GetAllTrainers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateTrainer">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/UpdateTrainer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteTrainer">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/DeleteTrainer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddSchedule">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/AddSchedule" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSchedulesByTrainer">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/GetSchedulesByTrainer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateSchedule">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/UpdateSchedule" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteSchedule">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/DeleteSchedule" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddService">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/AddService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetService">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/GetService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllServices">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/GetAllServices" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateService">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/UpdateService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteService">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/DeleteService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddEvent">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/AddEvent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEvent">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/GetEvent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllEvents">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/GetAllEvents" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEventsByDate">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/GetEventsByDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateEvent">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/UpdateEvent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteEvent">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/DeleteEvent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddBooking">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/AddBooking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBooking">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/GetBooking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookingsByUser">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/GetBookingsByUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBookingsByEvent">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/GetBookingsByEvent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBooking">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/UpdateBooking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteBooking">
+      <soap:operation soapAction="http://tempuri.org/IDatabaseService/DeleteBooking" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DatabaseService">
+    <wsdl:port name="BasicHttpBinding_IDatabaseService" binding="tns:BasicHttpBinding_IDatabaseService">
+      <soap:address location="http://localhost:51305/DatabaseService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -69,10 +69,9 @@
 
                     <Label Grid.Row="0" Grid.Column="0" Content="Услуга:"/>
                     <ComboBox x:Name="cbService" Grid.Row="0" Grid.Column="1" Margin="5" SelectionChanged="AddForm_Changed">
-                        <ComboBoxItem Content="Йога"/>
-                        <ComboBoxItem Content="Бокс"/>
-                        <ComboBoxItem Content="Кроссфит"/>
-                        <ComboBoxItem Content="Пилатес"/>
+                        <ComboBoxItem Content="Yoga"/>
+                        <ComboBoxItem Content="Box"/>
+                        <ComboBoxItem Content="Beg"/>
                     </ComboBox>
 
                     <Label Grid.Row="0" Grid.Column="2" Content="ФИО Тренера:"/>

@@ -11,8 +11,21 @@ namespace FitnessClub.DomainService
         // Вспомогательный метод для сокращения кода (проверка на null и сохранение)
         private bool SaveChanges(FitnessDbContext db)
         {
-            try { return db.SaveChanges() > 0; }
-            catch { return false; }
+            try
+            {
+                return db.SaveChanges() > 0;
+            }
+            catch (System.Data.Entity.Validation.DbEntityValidationException dbEx)
+            {
+                // Ошибки валидации (например, слишком длинная строка или null в обязательном поле)
+                string errorMsg = string.Join("; ", dbEx.EntityValidationErrors.SelectMany(x => x.ValidationErrors).Select(x => x.ErrorMessage));
+                throw new Exception("Ошибка валидации: " + errorMsg);
+            }
+            catch (Exception ex)
+            {
+                // Ошибки самой базы данных (внешние ключи, уникальность и т.д.)
+                throw new Exception("Ошибка БД: " + (ex.InnerException?.InnerException?.Message ?? ex.Message));
+            }
         }
 
         #region Credentials (Учетные данные)

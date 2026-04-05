@@ -1,4 +1,6 @@
 <Solution>
   <Project Path="FitnessClub.DomainService/FitnessClub.DomainService.csproj" Id="5ad2c0e6-5037-447f-9b46-2d599671d287" />
-  <Project Path="FitnessClubClient/FitnessClubClient.csproj" Id="2b80876a-cda5-4c1b-971c-31a8d4338bfc" />
+  <Project Path="FitnessClubClient/FitnessClubClient.csproj" Id="2b80876a-cda5-4c1b-971c-31a8d4338bfc">
+    <BuildDependency Project="FitnessClub.DomainService/FitnessClub.DomainService.csproj" />
+  </Project>
 </Solution>

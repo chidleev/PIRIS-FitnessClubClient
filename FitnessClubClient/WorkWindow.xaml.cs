@@ -1,19 +1,11 @@
-﻿using FitnessClub;
+﻿// Подключаем пространство имен вашей WCF службы (замените DbServiceRef на ваше имя, если нужно)
+using FitnessClubClient.DbServiceRef;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FitnessClubClient
 {
@@ -22,93 +14,160 @@ namespace FitnessClubClient
     /// </summary>
     public partial class WorkWindow : Window
     {
-        // Коллекция данных для расписания. Использование ObservableCollection 
-        // позволяет DataGrid обновляться автоматически при добавлении новых элементов.
-        private ObservableCollection<FitnessClass> _scheduleList;
+        private string _currentUserLogin;
 
-        // Изменяем конструктор так, чтобы он принимал логин авторизованного пользователя
-        public WorkWindow(string userLogin = "Администратор")
+        // Объявляем WCF TCP-клиента для связи с сервером
+        private DatabaseServiceClient _dbClient;
+
+        // Конструктор теперь принимает полное имя для отображения и логин для работы с БД
+        public WorkWindow(string displayName = "Администратор", string login = "admin")
         {
             InitializeComponent();
+            _currentUserLogin = login;
 
-            // Вывод логина в информационной панели
-            lblUserInfo.Content = $"Текущий пользователь: {userLogin}";
+            // Вывод информации о пользователе
+            lblUserInfo.Content = $"Текущий пользователь: {displayName}";
 
-            // Инициализация статических данных для DataGrid
-            InitializeStaticData();
+            // Инициализация подключения к серверу
+            _dbClient = new DatabaseServiceClient();
+
+            // Загрузка реальных данных из базы MySQL при открытии окна
+            RefreshDataGrid();
         }
 
-        private void InitializeStaticData()
+
+
+// МЕТОД: Загрузка всех событий из БД
+private void RefreshDataGrid()
+    {
+        try
         {
-            _scheduleList = new ObservableCollection<FitnessClass>
+            // 1. Получаем сырые данные с сервера (объекты Event из БД)
+            var eventsFromDb = _dbClient.GetAllEvents();
+
+            // 2. Преобразуем их так, чтобы названия свойств совпадали с Binding в XAML
+            var displayList = eventsFromDb.Select(ev => new
             {
-                new FitnessClass { ServiceName = "Йога", TrainerName = "Иванова А.И.", Date = DateTime.Now, Time = "10:00", AvailableSpots = 15 },
-                new FitnessClass { ServiceName = "Бокс", TrainerName = "Смирнов П.В.", Date = DateTime.Now.AddDays(1), Time = "18:00", AvailableSpots = 8 },
-                new FitnessClass { ServiceName = "Кроссфит", TrainerName = "Петров В.С.", Date = DateTime.Now, Time = "19:00", AvailableSpots = 10 }
-            };
+                // Оставляем как есть
+                ServiceName = ev.ServiceName,
 
-            // Привязка коллекции к таблице
-            dgSchedule.ItemsSource = _scheduleList;
+                // В БД только ID тренера. Превращаем в строку. 
+                // (В идеале на сервере нужен JOIN с таблицей Trainers, но для отображения хватит так)
+                TrainerName = "Тренер ID: " + ev.TrainerId,
+
+                // Вытаскиваем только дату
+                Date = ev.FromDate.Date,
+
+                // Вытаскиваем время в формате "Часы:Минуты"
+                Time = ev.FromDate.ToString("HH:mm"),
+
+                // Подменяем название для свободных мест
+                AvailableSpots = ev.MaxParticipants
+            }).ToList();
+
+            // 3. Привязка адаптированных данных к таблице
+            dgSchedule.ItemsSource = displayList;
         }
-
-        // Обработчик события изменения текста/выбора в полях формы добавления
-        private void AddForm_Changed(object sender, RoutedEventArgs e)
+        catch (Exception ex)
         {
-            // Валидация: проверяем заполнение всех необходимых полей
+            MessageBox.Show("Нет связи с сервером БД: " + ex.Message, "Ошибка сети", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    // ОБРАБОТЧИК: Валидация полей ввода (остается клиентской для мгновенного отклика UI)
+    private void AddForm_Changed(object sender, RoutedEventArgs e)
+        {
             bool isServiceSelected = cbService.SelectedItem != null;
             bool isTrainerFilled = !string.IsNullOrWhiteSpace(tbTrainer.Text);
             bool isDateSelected = dpAddDate.SelectedDate.HasValue;
             bool isTimeFilled = !string.IsNullOrWhiteSpace(tbTime.Text);
             bool isSpotsFilled = !string.IsNullOrWhiteSpace(tbSpots.Text) && int.TryParse(tbSpots.Text, out _);
 
-            // Кнопка становится активной, только если все поля заполнены корректно
             if (bAddRecord != null)
             {
                 bAddRecord.IsEnabled = isServiceSelected && isTrainerFilled && isDateSelected && isTimeFilled && isSpotsFilled;
             }
         }
 
-        // Обработчик кнопки "Добавить запись"
+        // ОБРАБОТЧИК: Добавление новой записи через сервер
         private void bAddRecord_Click(object sender, RoutedEventArgs e)
         {
-            // Формирование нового объекта и добавление в коллекцию
-            FitnessClass newClass = new FitnessClass
+            try
             {
-                ServiceName = ((ComboBoxItem)cbService.SelectedItem).Content.ToString(),
-                TrainerName = tbTrainer.Text,
-                Date = dpAddDate.SelectedDate.Value,
-                Time = tbTime.Text,
-                AvailableSpots = int.Parse(tbSpots.Text)
-            };
+                // 1. Считываем данные с формы и подготавливаем дату/время
+                DateTime selectedDate = dpAddDate.SelectedDate.Value;
+                TimeSpan time = TimeSpan.Parse(tbTime.Text); // Ожидается ввод в формате "14:00"
+                DateTime fullDateTime = selectedDate.Add(time);
+                
+                // 2. Формируем объект события (сущность из БД)
+                Event newEvent = new Event
+                {
+                    Id = 1,
+                    ServiceName = "Yoga",
+                    // Примечание: в вашей БД TrainerId - это int. Для простоты симулируем парсинг или берем ID = 1.
+                    // В идеале в ComboBox должны выбираться тренеры из БД.
+                    TrainerId = 1,
+                    FromDate = fullDateTime,
+                    Duration = 60, // Стандартная длительность 60 минут
+                    MaxParticipants = int.Parse(tbSpots.Text),
+                    Status = "new",
+                    Repeatable = false
+                };
 
-            _scheduleList.Add(newClass);
+                // 3. Отправляем на сервер
+                bool isSuccess = _dbClient.AddEvent(newEvent);
 
-            // Очистка полей ввода после добавления
-            cbService.SelectedIndex = -1;
-            tbTrainer.Clear();
-            dpAddDate.SelectedDate = null;
-            tbTime.Clear();
-            tbSpots.Clear();
+                if (isSuccess)
+                {
+                    MessageBox.Show("Новая запись успешно добавлена в расписание БД!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
 
-            MessageBox.Show("Новая запись успешно добавлена в расписание!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    // Очистка формы
+                    cbService.SelectedIndex = -1;
+                    tbTrainer.Clear();
+                    dpAddDate.SelectedDate = null;
+                    tbTime.Clear();
+                    tbSpots.Clear();
+
+                    // 4. АВТОМАТИЧЕСКОЕ ОБНОВЛЕНИЕ ТАБЛИЦЫ напрямую с сервера
+                    RefreshDataGrid();
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка при сохранении в базу данных.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Проверьте формат введенного времени (ЧЧ:ММ). Подробности: " + ex.Message, "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
-        // Обработчик кнопки "Напоминания" (Фильтрация по дате)
+        // ОБРАБОТЧИК: Напоминания (Строгая фильтрация ТОЛЬКО НА КЛИЕНТЕ)
         private void bReminders_Click(object sender, RoutedEventArgs e)
         {
             if (dpFilterDate.SelectedDate.HasValue)
             {
                 DateTime selectedDate = dpFilterDate.SelectedDate.Value.Date;
 
-                // Получаем представление данных DataGrid для применения фильтра
+                // Берем текущее представление данных, которое уже висит в DataGrid
                 ICollectionView cv = CollectionViewSource.GetDefaultView(dgSchedule.ItemsSource);
 
-                // Устанавливаем фильтр: показывать только те записи, дата которых совпадает с выбранной
-                cv.Filter = o =>
+                if (cv != null)
                 {
-                    FitnessClass fc = o as FitnessClass;
-                    return fc != null && fc.Date.Date == selectedDate;
-                };
+                    // Применяем фильтр локально к строкам таблицы
+                    cv.Filter = o =>
+                    {
+                        // Используем dynamic, так как данные загружены как анонимные типы
+                        dynamic row = o;
+                        return row.Date == selectedDate;
+                    };
+
+                    // Если после фильтрации строк не осталось, выводим сообщение
+                    if (cv.IsEmpty)
+                    {
+                        MessageBox.Show("На выбранную дату тренировок не найдено.", "Напоминания", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
             }
             else
             {
@@ -116,34 +175,63 @@ namespace FitnessClubClient
             }
         }
 
-        // Вспомогательная кнопка для сброса фильтра
+        // ОБРАБОТЧИК: Сброс фильтра (ТОЛЬКО НА КЛИЕНТЕ)
         private void bResetFilter_Click(object sender, RoutedEventArgs e)
         {
             dpFilterDate.SelectedDate = null;
+
+            // Получаем представление таблицы и просто сбрасываем фильтр (возвращаем все строки)
             ICollectionView cv = CollectionViewSource.GetDefaultView(dgSchedule.ItemsSource);
-            cv.Filter = null; // Сброс фильтра
+            if (cv != null)
+            {
+                cv.Filter = null;
+            }
         }
 
-        // Обработчик кнопки "Выход"
+        // ОБРАБОТЧИК: Выход из системы
         private void bLogout_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                // Закрываем TCP соединение с сервером
+                if (_dbClient != null && _dbClient.State == System.ServiceModel.CommunicationState.Opened)
+                {
+                    _dbClient.Close();
+                }
+            }
+            catch { _dbClient.Abort(); }
+
             // Возврат к окну авторизации
             MainWindow authWindow = new MainWindow();
             authWindow.Show();
             this.Close();
         }
-    }
-}
 
-namespace FitnessClub
-{
-    // Модель данных для расписания
-    public class FitnessClass
-    {
-        public string ServiceName { get; set; }
-        public string TrainerName { get; set; }
-        public DateTime Date { get; set; }
-        public string Time { get; set; }
-        public int AvailableSpots { get; set; }
+        // ====================================================================================
+        // ДОПОЛНИТЕЛЬНО: Метод создания бронирования (записи клиента на тренировку)
+        // Согласно тексту документа: "формирует объект бронирования и отправляет его на сервис"
+        // Вы можете привязать этот метод к новой кнопке "Записаться" в вашем интерфейсе.
+        // ====================================================================================
+        private void bBookEvent_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgSchedule.SelectedItem is Event selectedEvent)
+            {
+                Booking newBooking = new Booking
+                {
+                    EventId = selectedEvent.Id,
+                    Username = _currentUserLogin, // Используем логин, переданный из окна авторизации
+                    Status = "подтверждена",
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
+                };
+
+                bool success = _dbClient.AddBooking(newBooking);
+                if (success) MessageBox.Show("Вы успешно записались на тренировку!", "Успех");
+            }
+            else
+            {
+                MessageBox.Show("Сначала выберите тренировку из таблицы расписания.");
+            }
+        }
     }
 }
